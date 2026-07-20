@@ -2,8 +2,8 @@ This is a C++ general purpose language cheatsheet. You can use it just for gener
 
 Cheatsheet includes short explanations with simple examples.
 
-- [References](https://github.com/alexgaas/cppch/refs.md)
-- [Constants](https://github.com/alexgaas/cppch/consts.md)
+- [References](https://github.com/alexgaas/cppch/blob/main/refs.md)
+- [Constants](https://github.com/alexgaas/cppch/blob/main/consts.md)
 
 <!--
 - Type casting
