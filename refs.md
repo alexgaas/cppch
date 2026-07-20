@@ -26,7 +26,7 @@ compile as:
 ```sh
 g++ -std=c++20 -O2 main.cpp
 ```
-and run `./a.out`. You defentiely may expect result as **`1 2`** because nothing changed for **x** / **y**. That happens because we passed into function **swap** _local copies_ of **x/y** varibles therefore exchange inside of function did not affect variable defined in the _main_.
+and run `./a.out`. You definitely may expect result as **`1 2`** because nothing changed for **x** / **y**. That happens because we passed into function **swap** _local copies_ of **x/y** variables therefore exchange inside of function did not affect variables defined in the _main_.
 This is how C++ defines semantic of passing arguments into function.
 
 Let's fix our program using **pointers**. 
@@ -37,7 +37,7 @@ void swap(int* x, int* y){
     y = t;
 }
 ```
-Now build and run will show us expected result - `2 1`. However you can keep old _swap_ function semantic using **references**. The idea of _reference_ is looking pretty strightforward - when user defines entity as a reference, he expects to use not as a copy when passing into function but as a **same** enityy just with a **different name**.
+Now build and run will show us expected result - `2 1`. However you can keep old _swap_ function semantic using **references**. The idea of _reference_ is looking pretty straightforward - when user defines entity as a reference, he expects to use it not as a copy when passing into function but as the **same** entity just with a **different name**.
 so running this function:
 ```cpp
 void swap(int& x, int& y){
@@ -47,7 +47,7 @@ void swap(int& x, int& y){
 }
 
 ```
-gives a same correct result `2 1` instead of incorrect `1 1`.
+gives the same correct result `2 1` instead of incorrect `1 1`.
 
 Let's make a different more transparent example of how references work. 
 Here is very simple program:
@@ -65,7 +65,7 @@ int main(){
     return 0;
 }
 ```
-Here is compiler have to create and destroy to separate objects _v_ and _vv_ when program is done. However if we change [vv] to be created as a **reference** compiler will destroy _vv_ at the time _v_ should be destroyed.
+Here the compiler has to create and destroy two separate objects _v_ and _vv_ when the program is done. However if we change [vv] to be created as a **reference** the compiler will destroy _vv_ at the time _v_ should be destroyed.
 ```cpp
 ...
 vector& vv = v;
@@ -79,9 +79,9 @@ using namespace std;
 
 int main(){
     int x = 1;
-    // y is reference of x => read as same x but within a different name y
+    // y is reference to x => read as the same x but with a different name y
     int& y = x;
-    // z is reference on y eg another reference to x  => read as same x !! but within a different name z
+    // z is reference to y e.g. another reference to x => read as the same x !! but with a different name z
     int& z = y;
 
     cout << x << " " << y << " " << z << endl;
@@ -95,16 +95,16 @@ int main(){
     return 0;
 }
 ```
-If ypu build and run it you will see:
+If you build and run it you will see:
 ```ascii
 1 1 1
 0 0 0
 ```
-There is important moments this program demonstrates:
-- _z_ is not reference to reference, it is another reference to _x_
-- when user does `z = a`, _x_ becames 0, but NOT _z_ becomes reference to _a_
+There are important moments this program demonstrates:
+- _z_ is not a reference to reference, it is another reference to _x_
+- when user does `z = a`, _x_ becomes 0, but NOT _z_ becomes reference to _a_
 
-let's incremenet _a_ to show _z_ is not reference to _a_:
+let's increment _a_ to show _z_ is not reference to _a_:
 ```cpp
 ...
 a++;
@@ -113,9 +113,9 @@ cout << x << " " << y << " " << z << " " << a << endl;
 ```
 result will be as - `0 0 0 1`
 
-Summarizing that we can say if reference to the entity is defined we have to consider that reference as just referenced object just with different **alias** (name) until reference is valid. Reference is not distingushed from referenced object. As soon as user defined _y_ as reference on _x_ he would not be able to get difference between _x_ and _y_ besides names (beside of _decltype_ what will be considered separately).
+Summarizing that, we can say if reference to the entity is defined we have to consider that reference as the referenced object itself just with a different **alias** (name) until the reference is valid. Reference is not distinguished from the referenced object. As soon as user defined _y_ as reference to _x_ he would not be able to get any difference between _x_ and _y_ besides names (besides _decltype_ which will be considered separately).
 
-In most of cases, we need _references_ to pass them into functions, however references might be class members or just used as more correct aliases for objects in the functions. 
+In most cases, we need _references_ to pass them into functions, however references might be class members or just used as more correct aliases for objects in the functions. 
 
 #### Reference restrictions
 You can't create pointer to a reference:
@@ -131,7 +131,7 @@ main.cpp:6:9: error: 'x' declared as a pointer to a reference of type 'int &'
 1 error generated.
 ```
 
-But you can define reference for a pointer b/c pointer is C++ type and can be referenced as other types.
+But you can define a reference to a pointer because a pointer is a C++ type and can be referenced like other types.
 ```cpp
 #include <iostream>
 
@@ -146,9 +146,9 @@ int main(){
 }
 ```
 will output two same pointers - `0x16fcbed64 0x16fcbed64`.
-As you may see in this example _pp_ is just alias of the _p_ pointer!
+As you may see in this example _pp_ is just the alias of the _p_ pointer!
 
-You not allowed to create reference on reference like:
+You are not allowed to create reference to reference like:
 ```cpp
 int&& y = x;
 ```
@@ -199,7 +199,7 @@ int main(){
     return 0;
 }
 ```
-Reference must initialized with _lvalue_ only (in according to C++ standard every literal besides string literal is _rvalue_).
+Reference must be initialized with _lvalue_ only (according to the C++ standard every literal besides string literal is _rvalue_).
 
 #### Dangling references
 Let's make a simple function _f_ to return reference:
@@ -230,4 +230,4 @@ main.cpp:7:12: warning: reference to stack memory associated with local variable
 ./a.out
 1841869832
 ```
-As you may see we try to return reference on the object already destroyed in the scope of the function _f_ into _main_ what makes reference _x_ in the main aliasing non-existed object e.g "dead" reference. Execution of this code will rise **ub** e.g. undefined behaivor of your C++ program. That may return any value or just make segmentation fault, etc.
+As you may see we try to return a reference to the object already destroyed in the scope of the function _f_ into _main_, which makes reference _x_ in the main alias a non-existent object e.g. a "dead" reference. Execution of this code will raise **ub** e.g. undefined behavior of your C++ program. That may return any value or just cause a segmentation fault, etc.
