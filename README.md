@@ -1,6 +1,6 @@
-This is C++ general puprose language cheatsheet. You can use just for general understanding of some basic parts of C++ or as preparation sheet to C++ interview process.
+This is a C++ general purpose language cheatsheet. You can use it just for general understanding of some basic parts of C++ or as a preparation sheet for the C++ interview process.
 
-Cheetsheet includes short explanation with simple examples.
+Cheatsheet includes short explanations with simple examples.
 
 - [References](https://github.com/alexgaas/cppch/refs.md)
 - [Constants](https://github.com/alexgaas/cppch/consts.md)
@@ -12,12 +12,12 @@ Cheetsheet includes short explanation with simple examples.
 - Operator overloading
 - Inheritance, scope and access modifiers with inheritance
 - Type casting and inheritance
-- Multiple and virtual inheretance
+- Multiple and virtual inheritance
 - Polymorphism and virtual functions
 - RTTI, dynamic cast and vtables
 - Overloading and specialization of templates
 - Non-type template parameters
-- Template instantuaing
+- Template instantiating
 - Exceptions
 - RAII
 - Standard containers
@@ -29,7 +29,7 @@ Cheetsheet includes short explanation with simple examples.
 - Kinds of _value_, rvalue-references, universal references
 - Perfect forwarding, xvalues, reference qualifiers
 - auto, decltype
-- Structured bindings, declval, unqiue_ptr
+- Structured bindings, declval, unique_ptr
 - shared_ptr and weak_ptr inside
 - Unions and std::variant
 - std::variant inside and std::launder
