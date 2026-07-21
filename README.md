@@ -4,9 +4,8 @@ Cheatsheet includes short explanations with simple examples.
 
 - [References](https://github.com/alexgaas/cppch/blob/main/refs.md)
 - [Constants](https://github.com/alexgaas/cppch/blob/main/consts.md)
-
+- [Type casting](https://github.com/alexgaas/cppch/blob/main/casts.md)
 <!--
-- Type casting
 - Classes and structures
 - Constructors and destructors
 - Operator overloading
