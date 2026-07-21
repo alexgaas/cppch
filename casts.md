@@ -1,6 +1,6 @@
 ## Type casting
 
-Baseline
+#### C-style cast
 
 C++ has a simple way to cast inherited from C (it's called C-style cast):
 ```cpp
