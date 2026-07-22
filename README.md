@@ -5,8 +5,8 @@ Cheatsheet includes short explanations with simple examples.
 - [References](https://github.com/alexgaas/cppch/blob/main/refs.md)
 - [Constants](https://github.com/alexgaas/cppch/blob/main/consts.md)
 - [Type casting](https://github.com/alexgaas/cppch/blob/main/casts.md)
+- [Classes and structures](https://github.com/alexgaas/cppch/blob/main/classes.md)
 <!--
-- Classes and structures
 - Constructors and destructors
 - Operator overloading
 - Inheritance, scope and access modifiers with inheritance
