@@ -1,93 +1,92 @@
-## REFERENCES
+## References
 
 #### Baseline
 
-Let's make a simple swap function - to switch arguments inside of function:
+Let's start with a simple swap function designed to exchange argument values:
 
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-void swap(int x, int y){
+void swap(int x, int y) {
     int t = x;
     x = y;
     y = t;
 }
 
-int main(){
+int main() {
     int x = 1, y = 2;
     swap(x, y);
     cout << x << " " << y << endl;
     return 0;
 }
 ```
-compile as:
+Compile and run:
 ```sh
 g++ -std=c++20 -O2 main.cpp
+./a.out
 ```
-and run `./a.out`. You definitely may expect result as **`1 2`** because nothing changed for **x** / **y**. That happens because we passed into function **swap** _local copies_ of **x/y** variables therefore exchange inside of function did not affect variables defined in the _main_.
-This is how C++ defines semantic of passing arguments into function.
+The output is `1 2` because arguments in C++ are passed by value by default. The parameters `x` and `y` in `swap` are local copies, so modifications inside `swap` do not affect the variables in `main()`.
 
-Let's fix our program using **pointers**. 
+We can fix this function using **pointers**:
 ```cpp
-void swap(int* x, int* y){
-    int* t = x;
+void swap(int* x, int* y) {
+    int t = *x;
     *x = *y;
-    y = t;
+    *y = t;
 }
 ```
-Now build and run will show us expected result - `2 1`. However you can keep old _swap_ function semantic using **references**. The idea of _reference_ is looking pretty straightforward - when user defines entity as a reference, he expects to use it not as a copy when passing into function but as the **same** entity just with a **different name**.
-so running this function:
+Building and executing with `swap(&x, &y)` outputs `2 1`.
+
+Alternatively, we can maintain clean call-site syntax using **references**. A reference acts as an **alias** (another name) for an existing object rather than creating a copy:
+
 ```cpp
-void swap(int& x, int& y){
+void swap(int& x, int& y) {
     int t = x;
     x = y;
     y = t;
 }
-
 ```
-gives the same correct result `2 1` instead of incorrect `1 1`.
+Calling `swap(x, y)` gives the expected output: `2 1`.
 
-Let's make a different more transparent example of how references work. 
-Here is very simple program:
+Let's see another example showing how references work:
 ```cpp
 #include <vector>
 
 using namespace std;
 
-int main(){
-    // create vector instance with name [v]
-    vector v = {1,2,3};
-    // create different vector with name [vv] and copy into it [v] values
-    // [vv] is not a reference, that is another vector instance!
+int main() {
+    // Create a vector instance named 'v'
+    vector v = {1, 2, 3};
+    // Create a second vector named 'vv' and copy 'v' into it
+    // 'vv' is an independent vector object!
     vector vv = v;
     return 0;
 }
 ```
-Here the compiler has to create and destroy two separate objects _v_ and _vv_ when the program is done. However if we change [vv] to be created as a **reference** the compiler will destroy _vv_ at the time _v_ should be destroyed.
+Here, the compiler constructs and destroys two distinct `vector` objects (`v` and `vv`). However, if we declare `vv` as a **reference**, no copy is performed; `vv` becomes an alias for `v`:
 ```cpp
-...
 vector& vv = v;
-...
 ```
-Let's see one more even more simple scenario of references:
+
+Let's look at another reference example:
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-int main(){
+int main() {
     int x = 1;
-    // y is reference to x => read as the same x but with a different name y
+    // 'y' is a reference to 'x' (an alias for 'x')
     int& y = x;
-    // z is reference to y e.g. another reference to x => read as the same x !! but with a different name z
+    // 'z' is a reference to 'y' (which means 'z' is also an alias for 'x')
     int& z = y;
 
     cout << x << " " << y << " " << z << endl;
 
     int a = 0;
-    // when we do z = a, we actually do x = y = z = a !!
+    // 'z = a' assigns the value of 'a' to 'x'
     z = a;
 
     cout << x << " " << y << " " << z << endl;
@@ -95,35 +94,32 @@ int main(){
     return 0;
 }
 ```
-If you build and run it you will see:
+Output:
 ```ascii
 1 1 1
 0 0 0
 ```
-There are important moments this program demonstrates:
-- _z_ is not a reference to reference, it is another reference to _x_
-- when user does `z = a`, _x_ becomes 0, but NOT _z_ becomes reference to _a_
 
-let's increment _a_ to show _z_ is not reference to _a_:
+Key takeaways from this program:
+- `z` is not a "reference to a reference"; C++ collapses references so `z` is simply another alias for `x`.
+- Executing `z = a` assigns the value of `a` to `x`. References **cannot be rebound** to refer to a different object after initialization.
+
+If we increment `a` afterward:
 ```cpp
-...
 a++;
-
 cout << x << " " << y << " " << z << " " << a << endl;
 ```
-result will be as - `0 0 0 1`
+The output is `0 0 0 1`, confirming that `z` did not rebind to `a`.
 
-Summarizing that, we can say if reference to the entity is defined we have to consider that reference as the referenced object itself just with a different **alias** (name) until the reference is valid. Reference is not distinguished from the referenced object. As soon as user defined _y_ as reference to _x_ he would not be able to get any difference between _x_ and _y_ besides names (besides _decltype_ which will be considered separately).
+In summary, a reference is an alias for an existing object. Operations performed on the reference directly mutate or inspect the referenced object. Once initialized, a reference cannot be rebound to point to another object. Aside from `decltype` rules, using a reference is semantically identical to using the object itself.
 
-In most cases, we need _references_ to pass them into functions, however references might be class members or just used as more correct aliases for objects in the functions. 
+#### Reference Restrictions
 
-#### Reference restrictions
-You can't create pointer to a reference:
+1. **You cannot create a pointer to a reference**:
 ```cpp
-int&* x;
+int&* x; // Error
 ```
-
-C++ standard does not allow this operation so compiler will not compile this code.
+The C++ standard forbids pointers to references:
 ```ascii
 main.cpp:6:9: error: 'x' declared as a pointer to a reference of type 'int &'
     6 |     int&* x;
@@ -131,13 +127,13 @@ main.cpp:6:9: error: 'x' declared as a pointer to a reference of type 'int &'
 1 error generated.
 ```
 
-But you can define a reference to a pointer because a pointer is a C++ type and can be referenced like other types.
+However, you **can** create a reference to a pointer (since a pointer is an object type):
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-int main(){
+int main() {
     int x = 0;
     int* p = &x;
     int*& pp = p;
@@ -145,20 +141,19 @@ int main(){
     return 0;
 }
 ```
-will output two same pointers - `0x16fcbed64 0x16fcbed64`.
-As you may see in this example _pp_ is just the alias of the _p_ pointer!
+Output: `0x16fcbed64 0x16fcbed64` (both show the same pointer value, as `pp` is an alias for pointer `p`).
 
-You are not allowed to create reference to reference like:
+2. **Forming a reference to a reference directly is invalid in variable declarations**:
 ```cpp
-int&& y = x;
+int&& y = x; // Error: '&&' is reserved for rvalue references
 ```
-_&&_ is product of _rvalue_ reference and is not allowed to use as part of _lvalue_ expression (this case will be considered separately later).
+The `&&` syntax denotes an **rvalue reference** and cannot bind directly to an lvalue like `x` in this context.
 
-Reference must be initialized:
+3. **A reference must be initialized when declared**:
 ```cpp
-int& z;
+int& z; // Error
 ```
-won't compile:
+Compiler error:
 ```ascii
 main.cpp:10:10: error: declaration of reference variable 'z' requires an initializer
    10 |     int& z;
@@ -166,68 +161,55 @@ main.cpp:10:10: error: declaration of reference variable 'z' requires an initial
 1 error generated.
 ```
 
-Reference can't be initialized using _rvalue_. Example:
+4. **A non-const lvalue reference cannot bind to an rvalue**:
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-void swap(int& x, int& y){
+void swap(int& x, int& y) {
     int t = x;
     x = y;
     y = t;
 }
 
-int main(){
-    // won't compile
-    /*
-     * main.cpp:13:10: error: non-const lvalue reference to type 'int' cannot bind to a temporary of type 'int'
-   13 |     int& z = 1;
-      |          ^   ~
-1 error generated.
-    */
-    int& z = 1;
+int main() {
+    // Won't compile:
+    // int& z = 1;
 
-    // wont' compile
-    /*
-     main.cpp:12:5: error: no matching function for call to 'swap'
-   12 |     swap(1,2);
-      |     ^~~~
-    */
-    swap(1,2);
+    // Won't compile:
+    // swap(1, 2);
 
     return 0;
 }
 ```
-Reference must be initialized with _lvalue_ only (according to the C++ standard every literal besides string literal is _rvalue_).
+A non-const lvalue reference must be initialized with an lvalue (in C++, numeric and character literals are rvalues, whereas string literals are lvalues).
 
-#### Dangling references
-Let's make a simple function _f_ to return reference:
+#### Dangling References
+
+Consider a function returning a reference to a local variable:
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-int& f(){
+int& f() {
     int x = 0;
     return x;
 }
 
-int main(){
+int main() {
     int x = f();
     cout << x << endl;
     return 0;
 }
 ```
-if we run this example we will get:
+Compiling this yields a warning:
 ```ascii
 g++ -std=c++20 -O2 main.cpp
 main.cpp:7:12: warning: reference to stack memory associated with local variable 'x' returned [-Wreturn-stack-address]
     7 |     return x;
       |            ^
 1 warning generated.
-
-./a.out
-1841869832
 ```
-As you may see we try to return a reference to the object already destroyed in the scope of the function _f_ into _main_, which makes reference _x_ in the main alias a non-existent object e.g. a "dead" reference. Execution of this code will raise **ub** e.g. undefined behavior of your C++ program. That may return any value or just cause a segmentation fault, etc.
+Returning a reference to a local stack variable (`x`) causes a **dangling reference** because `x` is destroyed when `f()` returns. Accessing this reference in `main()` triggers **undefined behavior** (UB), which may result in garbage values, memory corruption, or a segmentation fault.

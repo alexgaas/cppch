@@ -1,67 +1,70 @@
-## Classes and structures
+## Classes and Structures
 
 #### Baseline
-Classes and structs in C++ are the same except for default access modifiers (_private_ / _public_). 
-- Class fields/methods are _private_ by default
-- Struct fields/methods are _public_ by default
-- Inheritance by default in classes is _private_
-- Inheritance by default in structs is _public_
 
-You can add as many access modifiers as you want in a class/struct.
+Classes and structs in C++ are identical except for their default access specifiers and default inheritance access:
+- **Class**: members and base classes are `private` by default.
+- **Struct**: members and base classes are `public` by default.
 
-Let's see an example of how to build a simple class:
+You can include as many access specifier sections (`public:`, `private:`, `protected:`) as needed inside a class or struct.
+
+Here is an example of a simple class:
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-class Test{
-    private:
-        int test = 0;
+class Test {
+private:
+    int test = 0;
 
-    public:
-        void getTest(){
-            cout << test << endl;
-        }
+public:
+    void getTest() {
+        cout << test << endl;
+    }
 };
 
-int main(){
+int main() {
     Test t;
     t.getTest();
     return 0;
 }
 ```
-You can't initialize a class with the expression:
+
+You cannot instantiate an object using default constructor with parentheses:
 ```cpp
 Test t();
 ```
-Since the compiler assumes that _t_ is a function declaration with a return type of _Test_.
+This is known as the "most vexing parse" in C++, where the compiler interprets `Test t();` as a function declaration named `t` that takes no arguments and returns a `Test` object.
 
-You can do:
+To instantiate an object using the default constructor, write either:
+```cpp
+Test t;
+```
+or explicitly:
 ```cpp
 Test t = Test();
 ```
-That will call the default constructor - it is empty for us so we can do it.
 
-We can define class methods outside of the class definition using the class name as a qualified identifier. Class methods and fields will be available in the function defined outside of the class definition:
+We can also define class member functions outside of the class definition using the scope resolution operator (`::`). All private members of the class remain accessible inside member function definitions outside the class body:
 ```cpp
 #include <iostream>
 
 using namespace std;
 
-class Test{
-    private:
-        int test = 0;
+class Test {
+private:
+    int test = 0;
 
-    public:
-        void getTest();
+public:
+    void getTest();
 };
 
-void Test::getTest(){
+void Test::getTest() {
     cout << test << endl;
 }
 
-int main(){
+int main() {
     Test t = Test();
     t.getTest();
     return 0;
