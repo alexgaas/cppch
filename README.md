@@ -10,6 +10,7 @@ Cheatsheet includes short explanations with simple examples.
 - [Operator overloading](https://github.com/alexgaas/cppch/blob/main/op_overloading.md)
 - [Member initializer list in constructor](https://github.com/alexgaas/cppch/blob/main/mem_init_lists.md)
 - [Arithmetric operators overloading](https://github.com/alexgaas/cppch/blob/main/arithmetic_ops.md)
+<!--
 - Inheritance, scope and access modifiers with inheritance
 - Type casting and inheritance
 - Multiple and virtual inheritance
