@@ -17,6 +17,7 @@ Each topic includes concise explanations accompanied by clear, runnable code exa
 - [Const Member Functions](const_methods.md)
 - [Stream Input / Output Operator Overloading](stream_in_out.md)
 - [Static Members (Fields and Methods)](static.md)
+- [User-Defined Conversions and the `explicit` Keyword](explicit.md)
 
 <!-- Upcoming Topics:
 - Inheritance, scope, and access modifiers
