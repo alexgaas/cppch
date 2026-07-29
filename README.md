@@ -11,7 +11,8 @@ Cheatsheet includes short explanations with simple examples.
 - [Operator overloading](https://github.com/alexgaas/cppch/blob/main/op_overloading.md)
 - [Arithmetric operators overloading](https://github.com/alexgaas/cppch/blob/main/arithmetic_ops.md)
 - [Constant methods](https://github.com/alexgaas/cppch/blob/main/const_methods.md)
-- [Stream input/output operators overloading](https://github.com/alexgaas/cppch/blob/main/stream_in_out.md.md)
+- [Stream input/output operators overloading](https://github.com/alexgaas/cppch/blob/main/stream_in_out.md)
+- [Static fields and methods](https://github.com/alexgaas/cppch/blob/main/static.md)
 <!--
 - Inheritance, scope and access modifiers with inheritance
 - Type casting and inheritance
