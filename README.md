@@ -20,6 +20,7 @@ Each topic includes concise explanations accompanied by clear, runnable code exa
 - [User-Defined Conversions and the `explicit` Keyword](explicit.md)
 - [Function Call Overloading and Comparators](comparators.md)
 - [Pointers to Members](pointers_to_members.md)
+- [Nested Classes and Local Classes](inner_classes.md)
 <!-- Upcoming Topics:
 - Inheritance, scope, and access modifiers
 - Type casting and inheritance
