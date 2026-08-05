@@ -35,6 +35,7 @@ Each topic includes concise explanations accompanied by clear, runnable code exa
 22. [Polymorphism and Virtual Functions](poly_and_virt_fn.md)
 23. [Abstract Classes and Pure Virtual Functions](abstr_class.md)
 24. [Virtual Destructors](virt_destr.md)
+25. [Dynamic Cast and RTTI](dynamic_cast.md)
 
 <!-- Upcoming Topics:
 - Inheritance, scope, and access modifiers
