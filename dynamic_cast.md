@@ -228,6 +228,7 @@ Cast succeeded
 `dynamic_cast` safely verifies dynamic types at runtime, but handles failed casts differently depending on whether pointers or references are used:
 
 1. **Pointers**: If the cast fails, `dynamic_cast` returns `nullptr`:
+
    ```cpp
    TBase b;
    TBase* bp = &b;
@@ -238,6 +239,7 @@ Cast succeeded
    ```
 
 2. **References**: Because C++ references cannot be null, a failed `dynamic_cast` throws a `std::bad_cast` exception (defined in `<typeinfo>`):
+
    ```cpp
    #include <iostream>
    #include <typeinfo>
@@ -250,6 +252,3 @@ Cast succeeded
        std::cout << "Reference cast failed: " << e.what() << std::endl;
    }
    ```
-
----
-[← Back to README](README.md)
