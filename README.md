@@ -38,31 +38,6 @@ Each topic includes concise explanations accompanied by clear, runnable code exa
 25. [Dynamic Cast and RTTI](dynamic_cast.md)
 26. [Virtual Method Tables (Vtables) and Memory Layout](vtable.md)
 
-<!-- Upcoming Topics:
-- Inheritance, scope, and access modifiers
-- Type casting and inheritance
-- Multiple and virtual inheritance
-- Polymorphism and virtual functions
-- RTTI, dynamic_cast, and vtables
-- Template overloading and specialization
-- Non-type template parameters
-- Template instantiation
-- Exceptions
-- RAII
-- Standard containers
-- Iterators
-- std::vector implementation details
-- std::list, std::map, and std::unordered_map implementation details
-- Allocators, scoped allocators, alignment, aligned_alloc
-- Move semantics and move constructors
-- Value categories (lvalues, rvalues, xvalues), universal references
-- Perfect forwarding and reference qualifiers
-- auto and decltype
-- Structured bindings, std::declval, std::unique_ptr
-- std::shared_ptr and std::weak_ptr implementation details
-- Unions and std::variant
-- Type erasure idiom and std::any
-- Lambda expressions and std::function
-- std::bind, std::invoke, SFINAE
-- std::enable_if and std::is_constructible
--->
+### Templates
+
+27. [Template Basics](templates_baseline.md)
