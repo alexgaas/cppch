@@ -36,6 +36,7 @@ Each topic includes concise explanations accompanied by clear, runnable code exa
 23. [Abstract Classes and Pure Virtual Functions](abstr_class.md)
 24. [Virtual Destructors](virt_destr.md)
 25. [Dynamic Cast and RTTI](dynamic_cast.md)
+26. [Virtual Method Tables (Vtables) and Memory Layout](vtable.md)
 
 <!-- Upcoming Topics:
 - Inheritance, scope, and access modifiers
