@@ -43,4 +43,6 @@ Each topic includes concise explanations accompanied by clear, runnable code exa
 27. [Template Basics](templates_baseline.md)
 28. [Function Template Overloading](templates_func.md)
 29. [Template Specializations](template_spec.md)
+30. [Non-Type Template Parameters](non_type_params.md)
+
 
