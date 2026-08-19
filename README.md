@@ -44,5 +44,8 @@ Each topic includes concise explanations accompanied by clear, runnable code exa
 28. [Function Template Overloading](templates_func.md)
 29. [Template Specializations](template_spec.md)
 30. [Non-Type Template Parameters](non_type_params.md)
-
-
+31. [Template Template Parameters](temp_temp_params.md)
+32. [Basic Type Traits](basic_type_traits.md)
+33. [Dependent Names](dep_names.md)
+34. [Two-Phase Translation and Template Instantiation](two_phase_translation.md)
+35. [Variadic Templates](variadic_templates.md)
