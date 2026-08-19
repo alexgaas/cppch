@@ -49,3 +49,4 @@ Each topic includes concise explanations accompanied by clear, runnable code exa
 33. [Dependent Names](dep_names.md)
 34. [Two-Phase Translation and Template Instantiation](two_phase_translation.md)
 35. [Variadic Templates](variadic_templates.md)
+36. [Fold Expressions](fold_expr.md)
