@@ -51,3 +51,7 @@ Each topic includes concise explanations accompanied by clear, runnable code exa
 35. [Variadic Templates](variadic_templates.md)
 36. [Fold Expressions](fold_expr.md)
 37. [Template Argument Deduction and Deduction Guides](dedaction_rules.md)
+
+### Exceptions
+
+38. [Exception Handling Basics](ex_baseline.md)
